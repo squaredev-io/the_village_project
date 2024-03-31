@@ -4,6 +4,7 @@ from PIL import Image
 import os
 
 
+@st.cache_data(ttl=3600)
 def load_data(path="data/Instructional_Design_Models_v2.xlsx"):
     try:
         data = pd.read_excel(path)
@@ -16,6 +17,7 @@ def load_data(path="data/Instructional_Design_Models_v2.xlsx"):
     from PIL import Image
 
 
+@st.cache_data(ttl=3600)
 def find_and_load_image(image_name, directory="data/images"):
     extensions = ["png", "jpg", "gif", "JPG"]
 
@@ -40,3 +42,20 @@ def display_image(image):
         st.image(image, caption="Design (Scheme and source)")
     else:
         st.error("Failed to load and display the image.")
+
+
+@st.cache_data(ttl=3600)
+def add_logo():
+    st.markdown(
+        f"""
+            <style>
+                [data-testid="stSidebar"] {{
+                    background-image: url(https://www.thevillageproject.eu/wp-content/uploads/2023/05/cropped-village-logo_web-300x128.png);
+                    background-repeat: no-repeat;
+                    padding-top: 80px;
+                    background-position: 20px 20px;
+                }}
+            </style>
+            """,
+        unsafe_allow_html=True,
+    )

@@ -2,7 +2,11 @@ import streamlit as st
 import pandas as pd
 from utils import *
 
-st.title("Village project Model Explorer")
+st.set_page_config(page_title="Village project model database", layout="wide")
+
+add_logo()
+st.title("Village project model database")
+
 
 data = load_data()
 
@@ -57,6 +61,17 @@ if not data.empty:
     else:
         st.error("No data available for the selected filters.")
 
+file_url = "https://github.com/squaredev-io/village/raw/main/data/Instructional_Design_Models_v2.xlsx"
+st.sidebar.markdown(
+    f"[Download Data in Excel file]({file_url})", unsafe_allow_html=True
+)
+
+# download_button = st.sidebar.audiodownload_button(
+#     label="Download dataset",
+#     data=data,
+#     type="secondary",
+#     file_name=""file_name"",
+# )
 # st.sidebar.header("Questionnaire")
 # if st.sidebar.button("Start Questionnaire"):
 #     show_questionnaire = True
