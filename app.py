@@ -61,7 +61,7 @@ if not data.empty:
     else:
         st.error("No data available for the selected filters.")
 
-file_url = "https://github.com/squaredev-io/village/raw/main/data/Instructional_Design_Models_v2.xlsx"
+file_url = "https://github.com/stavrostheocharis/the_village_project/raw/main/data/Instructional_Design_Models_v2.xlsx"
 st.sidebar.markdown(
     f"[Download Data in Excel file]({file_url})", unsafe_allow_html=True
 )
