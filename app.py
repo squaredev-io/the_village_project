@@ -35,22 +35,24 @@ if not data.empty:
     if not filtered_data.empty:
         # Displaying models in columns
         for i, row in filtered_data.iterrows():
-            st.markdown(f"### {row['Model Name']}")
+            st.markdown(f"### Model: {row['Model Name']}")
             st.markdown(f"**Responsible Partner:** {row['Responsible partner']}")
-
+            st.write(f"**Short Background:** {row['Short Background']}")
             with st.expander("See more details"):
-                st.write(f"**Short Background:** {row['Short Background']}")
                 st.write(f"**Short Description:** {row['Short Description']}")
-                st.write(f"**Citing sources:** {row['Citing sources']}")
-                st.write(
-                    f"**Design (Scheme and source):** {row['Design (Scheme and source)']}"
-                )
-                st.write(
-                    f"**Fields the model can or was used in:** {row['Other - which fields the model can or was used in; website(s) describing the model']}"
-                )
+                st.write(f"**Citing sources:** {row['Sources']}")
                 st.write(
                     f"**Useful in Engineering Courses:** {row['Is it useful in engineering courses?']}"
                 )
+                st.divider()
+                loaded_image = find_and_load_image(selected_model)
+                if loaded_image:
+                    display_image(
+                        loaded_image
+                    )  # This will display the image if it's successfully loaded
+                else:
+                    st.error("Failed to find or load the image.")
+
             # st.markdown("---")  # Divider
     else:
         st.error("No data available for the selected filters.")
