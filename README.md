@@ -1,2 +1,2 @@
 # village
-This is the main app of the Village project made in Streamlit
+This is the models database of the Village project made in Streamlit
