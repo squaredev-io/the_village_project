@@ -5,7 +5,7 @@ import os
 
 
 @st.cache_data(ttl=3600)
-def load_data(path="data/Instructional_Design_Models_v2.xlsx"):
+def load_data(path="data/Instructional_Design_Models_v3.xlsx"):
     try:
         data = pd.read_excel(path)
         data.fillna("No available data", inplace=True)
