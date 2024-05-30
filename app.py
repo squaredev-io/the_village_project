@@ -44,18 +44,24 @@ if not data.empty:
     if not filtered_data.empty:
         # Displaying models in columns
         for i, row in filtered_data.iterrows():
-            col1, col2 = st.columns(2)
+            col1, col2, col3 = st.columns([2, 1, 1])
             with col1:
                 st.markdown(f"### Model: {row['Model Name']}")
+
             with col2:
+                st.markdown("   ")
+                st.markdown("###### Integration the VR LAB*: ")
+
+            with col3:
                 try:
                     rating_str = "⭐️" * int(
                         row["Number of starts (out of 5)"]
                     ) + "☆" * (5 - int(row["Number of starts (out of 5)"]))
                     st.markdown("   ")
                     st.markdown(
-                        f"###### Rating: {rating_str} ({row['Number of starts (out of 5)']}/5)"
+                        f"###### {rating_str} ({row['Number of starts (out of 5)']}/5)"
                     )
+
                 except Exception as e:
                     print("No stars")
             st.markdown(f"**Responsible Partner:** {row['Responsible partner']}")
