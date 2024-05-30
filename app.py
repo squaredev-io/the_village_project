@@ -14,8 +14,13 @@ if not data.empty:
     # Sidebar for Filters
     st.sidebar.header("Filters")
     model_names = data["Model Name"].unique()
-    selected_model = st.sidebar.selectbox("Model Name", model_names)
+    ranked_model_names = data.loc[data["Ranked"] == True]["Model Name"].unique()
+    ranked_models = st.sidebar.checkbox("Show only ranked models")
 
+    if not ranked_models:
+        selected_model = st.sidebar.selectbox("Model Name", model_names)
+    else:
+        selected_model = st.sidebar.selectbox("Model Name", ranked_model_names)
     # Improved Filter: Allowing selection of "All" or specific values
     engineering_options = ["All"] + list(
         data["Is it useful in engineering courses?"].unique()
@@ -39,7 +44,20 @@ if not data.empty:
     if not filtered_data.empty:
         # Displaying models in columns
         for i, row in filtered_data.iterrows():
-            st.markdown(f"### Model: {row['Model Name']}")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown(f"### Model: {row['Model Name']}")
+            with col2:
+                try:
+                    rating_str = "⭐️" * int(
+                        row["Number of starts (out of 5)"]
+                    ) + "☆" * (5 - int(row["Number of starts (out of 5)"]))
+                    st.markdown("   ")
+                    st.markdown(
+                        f"###### Rating: {rating_str} ({row['Number of starts (out of 5)']}/5)"
+                    )
+                except Exception as e:
+                    print("No stars")
             st.markdown(f"**Responsible Partner:** {row['Responsible partner']}")
             st.write(f"**Short Background:** {row['Short Background']}")
             with st.expander("See more details"):
