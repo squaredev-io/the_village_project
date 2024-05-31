@@ -51,6 +51,7 @@ if not data.empty:
             with col2:
                 st.markdown("   ")
                 st.markdown("###### Integration the VR LAB*: ")
+                st.caption("###### *According to the evaluation of 20 experts")
 
             with col3:
                 try:
